@@ -4,7 +4,11 @@ import "./Button.css";
 
 export default (props) => {
   return (
-    <button className={`Button ${props.btnType}`} onClick={props.clicked}>
+    <button
+      className={`Button ${props.btnType}`}
+      onClick={props.clicked}
+      {...props}
+    >
       {/* {`Button ${props.btnType}`} */}
       {props.children}
     </button>
