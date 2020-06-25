@@ -5,7 +5,10 @@ import Backdrop from "../Backdrop/Backdrop";
 class Modal extends Component {
   // Prevent Modal from rerendering when modal is hidden but client add more ingredients on the burger
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.show !== this.props.show;
+    return (
+      nextProps.show !== this.props.show ||
+      nextProps.children !== this.props.children
+    );
   }
   // componentWillUpdate() {
   //   console.log("Modal will udpate");

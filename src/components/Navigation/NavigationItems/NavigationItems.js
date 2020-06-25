@@ -5,10 +5,8 @@ import NavigationItem from "./NavigationItem/NavigationItem";
 export default () => {
   return (
     <ul className={classes.NavigationItems}>
-      <NavigationItem active link="/">
-        Tes 1
-      </NavigationItem>
-      <NavigationItem link="/">Tes 2</NavigationItem>
+      <NavigationItem link="/">Burger Builder</NavigationItem>
+      <NavigationItem link="/orders">Checkout</NavigationItem>
     </ul>
   );
 };
