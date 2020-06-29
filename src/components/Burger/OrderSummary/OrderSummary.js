@@ -20,10 +20,10 @@ export default (props) => {
       </p>
       <h2 style={{ textAlign: "center" }}>Continue to check out ?</h2>
       <div style={{ float: "right" }}>
-        <Button btnType="Danger" clicked={props.purchaseCanceled}>
+        <Button btntype="Danger" clicked={props.purchaseCancelled}>
           CANCEL
         </Button>
-        <Button btnType="Success" clicked={props.purchaseContinued}>
+        <Button btntype="Success" clicked={props.purchaseContinued}>
           CONTINUE
         </Button>
       </div>

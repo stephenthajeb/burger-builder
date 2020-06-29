@@ -4,6 +4,7 @@ import classes from "./ContactData.module.css";
 import axios from "../../../../axios-orders";
 import Spinner from "../../../../components/UI/Spinner/Spinner";
 import Input from "../../../../components/UI/Input/Input";
+import { connect } from "react-redux";
 
 class ContactData extends Component {
   state = {
@@ -170,7 +171,7 @@ class ContactData extends Component {
             onChange={(event) => this.onChangeHandler(event, datum.name)}
           />
         ))}
-        <Button btnType="Success" disabled={!this.state.formIsSubmittable}>
+        <Button btntype="Success" disabled={!this.state.formIsSubmittable}>
           ORDER
         </Button>
       </form>
@@ -186,4 +187,12 @@ class ContactData extends Component {
     );
   }
 }
-export default ContactData;
+
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    price: state.price,
+  };
+};
+
+export default connect(mapStateToProps)(ContactData);
