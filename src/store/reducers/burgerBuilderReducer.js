@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
+import { updatedObject } from "../utility";
 
 const INGREDIENT_PRICES = {
   salad: 4000,
@@ -17,41 +18,49 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
-      return {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] + 1, //ES6 Syntax to update certain properties in an object
-        },
+      const newIngredient = {
+        [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
+      }; //ES6 Syntax to update certain properties in an object
+      const updatedIngredients1 = updatedObject(
+        state.ingredients,
+        newIngredient
+      );
+      const updatedState1 = {
+        ingredients: updatedIngredients1,
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
       };
+      return updatedObject(state, updatedState1);
     case actionTypes.REMOVE_INGREDIENT:
-      return {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
-        },
+      const removeIngredient = {
+        [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
+      };
+      const updatedIngredients2 = updatedObject(
+        state.ingredients,
+        removeIngredient
+      );
+      const updatedState2 = {
+        ingredients: updatedIngredients2,
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
       };
+      return updatedObject(state, updatedState2);
+
     case actionTypes.SET_INGREDIENTS:
-      return {
-        ...state,
-        ingredients:
+      const fetchIngredients = {
           //To get the right order(not alphabetically sort based on ingredient's name) of the ingredients display instead of using ingredients: ingredients
-          {
-            salad: action.ingredients.salad,
-            bacon: action.ingredients.bacon,
-            cheese: action.ingredients.cheese,
-            meat: action.ingredients.meat,
-          },
+          salad: action.ingredients.salad,
+          bacon: action.ingredients.bacon,
+          cheese: action.ingredients.cheese,
+          meat: action.ingredients.meat,
+        },
+        updatedIngredients = updatedObject(state.ingredients, fetchIngredients);
+      const updatedState3 = {
+        ingredients: updatedIngredients,
         error: false,
+        totalPrice: 3000,
       };
+      return updatedObject(state, updatedState3);
     case actionTypes.FETCH_INGREDIENTS_FAILED:
-      return {
-        ...state,
-        error: true,
-      };
+      return updatedObject(state, { error: true });
     default:
       return state;
   }
