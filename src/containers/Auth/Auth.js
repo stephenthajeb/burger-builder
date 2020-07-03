@@ -6,6 +6,7 @@ import classes from "./Auth.module.css";
 import { authenticate } from "../../store/actions/authAction";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { checkValidity } from "../../store/utility";
 
 class Auth extends Component {
   state = {
@@ -42,27 +43,13 @@ class Auth extends Component {
     isSignup: true,
   };
 
-  checkValidity(value, rules) {
-    let isValid = true;
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-    return isValid;
-  }
-
   inputChangedHandler = (event, controlName) => {
     const updatedControls = {
       ...this.state.controls,
       [controlName]: {
         ...this.state.controls[controlName],
         value: event.target.value,
-        valid: this.checkValidity(
+        valid: checkValidity(
           event.target.value,
           this.state.controls[controlName].validation
         ),
