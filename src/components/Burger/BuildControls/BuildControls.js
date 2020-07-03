@@ -28,7 +28,7 @@ export default (props) => (
       disabled={!props.purchasable}
       onClick={props.purchaseHandler}
     >
-      Order Now
+      {props.isAuthenticated ? "Order Now" : "Sign in to Order"}
     </button>
   </div>
 );

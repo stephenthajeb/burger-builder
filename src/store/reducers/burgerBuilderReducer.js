@@ -12,6 +12,7 @@ const initialState = {
   ingredients: null,
   totalPrice: 3000,
   error: false,
+  building: false,
 };
 
 //Reducer
@@ -19,8 +20,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENT:
       const newIngredient = {
-        [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
-      }; //ES6 Syntax to update certain properties in an object
+        [action.ingredientName]: state.ingredients[action.ingredientName] + 1, //ES6 Syntax to update certain properties in an object
+      };
       const updatedIngredients1 = updatedObject(
         state.ingredients,
         newIngredient
@@ -28,6 +29,7 @@ export default (state = initialState, action) => {
       const updatedState1 = {
         ingredients: updatedIngredients1,
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+        building: true,
       };
       return updatedObject(state, updatedState1);
     case actionTypes.REMOVE_INGREDIENT:
@@ -41,6 +43,7 @@ export default (state = initialState, action) => {
       const updatedState2 = {
         ingredients: updatedIngredients2,
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+        building: true,
       };
       return updatedObject(state, updatedState2);
 
@@ -57,6 +60,7 @@ export default (state = initialState, action) => {
         ingredients: updatedIngredients,
         error: false,
         totalPrice: 3000,
+        building: false,
       };
       return updatedObject(state, updatedState3);
     case actionTypes.FETCH_INGREDIENTS_FAILED:

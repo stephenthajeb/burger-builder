@@ -94,10 +94,11 @@ class ContactData extends Component {
 
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.totalPrice,
+      price: this.props.price,
       orderData: formData,
+      userId: this.props.userId,
     };
-    this.props.orderBurger(order);
+    this.props.orderBurger(order, this.props.token);
   };
 
   onChangeHandler = (event, inputName) => {
@@ -134,7 +135,6 @@ class ContactData extends Component {
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
     }
-
     return isValid;
   }
 
@@ -180,15 +180,17 @@ class ContactData extends Component {
 const mapStateToProps = (state) => {
   return {
     ingredients: state.burgerBuilderReducer.ingredients,
-    price: state.burgerBuilderReducer.price,
+    price: state.burgerBuilderReducer.totalPrice,
     loading: state.orderReducer.loading,
+    token: state.authReducer.token,
+    userId: state.authReducer.userId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    orderBurger: (orderData) =>
-      dispatch(orderActions.purchaseBurger(orderData)),
+    orderBurger: (orderData, token) =>
+      dispatch(orderActions.purchaseBurger(orderData, token)),
   };
 };
 
