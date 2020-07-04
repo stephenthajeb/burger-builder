@@ -7,10 +7,10 @@ export default ({ isAuthenticated }) => {
     <ul className={classes.NavigationItems}>
       <NavigationItem link="/">Burger Builder</NavigationItem>
       {isAuthenticated ? (
-        <NavigationItem link="/orders">Orders</NavigationItem>
-      ) : null}
-      {isAuthenticated ? (
-        <NavigationItem link="/logout">Log Out</NavigationItem>
+        <>
+          <NavigationItem link="/orders">Orders</NavigationItem>
+          <NavigationItem link="/logout">Log Out</NavigationItem>
+        </>
       ) : (
         <NavigationItem link="/auth">Authenticate</NavigationItem>
       )}
