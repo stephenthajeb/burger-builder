@@ -57,7 +57,6 @@ export const authenticate = (email, password, isSignup) => {
     axios
       .post(url, authData)
       .then((res) => {
-        console.log(res);
         const sessionData = {
           token: res.data.idToken,
           userId: res.data.localId,

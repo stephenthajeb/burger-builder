@@ -10,7 +10,6 @@ class Checkout extends Component {
   };
 
   checkoutContinued = () => {
-    console.log(this.props);
     if (this.props.location.pathname !== "/checkout/contact-data") {
       this.props.history.replace("checkout/contact-data");
     }

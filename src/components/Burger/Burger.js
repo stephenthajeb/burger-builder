@@ -14,7 +14,6 @@ export default (props) => {
       //Flattern array of arrays to 1D of array
       return arr.concat(el);
     }, []);
-  // console.log(transformedIngredients);
 
   if (transformedIngredients.length === 0) {
     transformedIngredients = <p> Please start adding any ingredients !!! </p>;
