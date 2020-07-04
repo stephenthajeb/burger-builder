@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
+import firebase from "firebase";
 
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
@@ -25,14 +26,26 @@ export const purchaseBurgerStart = () => {
 export const purchaseBurger = (orderData, token) => {
   return (dispatch) => {
     dispatch(purchaseBurgerStart());
+
+    const date = new Date();
+    const userId = JSON.parse(localStorage.getItem("session")).userId;
     axios
-      .post("/orders.json?auth=" + token, orderData) //base url + orders (MUST BE IN.json)
+      .put("/orders/" + date + userId + ".json?auth=" + token, orderData)
       .then((response) => {
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
       .catch((error) => {
         dispatch(purchaseBurgerFail(error));
       });
+
+    // axios
+    //   .post("/orders.json?auth=" + token, orderData)
+    //   .then((response) => {
+    //     dispatch(purchaseBurgerSuccess(response.data.name, orderData));
+    //   })
+    //   .catch((error) => {
+    //     dispatch(purchaseBurgerFail(error));
+    //   });
   };
 };
 

@@ -3,18 +3,21 @@ import Button from "../../UI/Button/Button";
 
 export default (props) => {
   const ingredientsSummary = Object.keys(props.ingredients).map((igKey) => {
-    return (
-      <li key={igKey}>
+    return props.ingredients[igKey] !== 0 ? (
+      <li style={{ listStyle: "none" }} key={igKey}>
         <span style={{ textTransform: "capitalize" }}>{igKey}</span> :{" "}
         {props.ingredients[igKey]}
       </li>
-    );
+    ) : null;
   });
   return (
     <>
       <h3>Your Order</h3>
       <p>A delicious burger with the following ingredients :</p>
-      <ul>{ingredientsSummary}</ul>
+      <ul style={{ paddingInlineStart: "0px" }}>
+        <hr />
+        {ingredientsSummary}
+      </ul>
       <p>
         <strong>Total Price : Rp {props.price}</strong>
       </p>
